@@ -1,3 +1,4 @@
+//Jest code to test the Intern Class module definition
 const Intern = require("../lib/Intern");
 
 test("Can set school via constructor", () => {

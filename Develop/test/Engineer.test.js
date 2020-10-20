@@ -1,3 +1,4 @@
+//Jest code to test the Engineer Class module definition
 const Engineer = require("../lib/Engineer");
 
 test("Can set GitHUb account via constructor", () => {

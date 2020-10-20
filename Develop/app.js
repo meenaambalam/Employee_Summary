@@ -1,3 +1,4 @@
+// The Employee Summary Application
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -9,13 +10,10 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const { mainModule } = require("process");
+//const { mainModule } = require("process");
 const Employee = require("./lib/Employee");
 
 const employeeArray = [];
-const idArray = [];
-
-
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -40,28 +38,28 @@ const idArray = [];
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-
+//defining the structure of the Employee Summary CLI Menu
 function employeeMenu() {
-    addManagerInfo();
 
+    // Defining the Manager related Menu Prompts and pushing the information to the Employee Array
     function addManagerInfo(){
-        console.log("Hi, Welcome to Employee Summary App: \n");
+        console.log("Hi, Welcome to the Employee Summary App! \n");
         console.log("Please enter information of your Team:");
         inquirer.prompt([
                 {
                     type: "input",
                     name: "managerName",
-                    message: "Plese enter your Manager's name:"
+                    message: "Enter Manager's name:"
                 },
                 {
                     type: "input",
                     name: "managerId",
-                    message: "Enter your Manager's id:"
+                    message: "Enter Manager's id:"
                 },
                 {
                     type: "input",
                     name: "managerEmail",
-                    message: "Please enter your Manager's email:"
+                    message: "Please enter Manager's email id:"
                 },
                 {
                     type: "input",
@@ -71,17 +69,17 @@ function employeeMenu() {
             ]).then(answers => {
                 employeeArray.push(new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNum));
                 //console.log("Employee Array:" +  JSON.stringify(employeeArray,null,""));
-                idArray.push(answers.managerId);
                 addTeamInfo();
             });
     }
 
+    // Defining the Manager's Team related Menu Prompts and pushing the information to the Employee Array with respective information
     function addTeamInfo(){
         inquirer.prompt([
             {
-                type: "checkbox",
+                type: "list",
                 name: "employeeRole",
-                message: "Plese start entering your Employee's Information: \n What is the Empplyee's role:",
+                message: "\n\nPlease enter your Employee's Information: \n What is the Employee's role?",
                 choices: ["Engineer", "Intern", "No More employees to Add"]
             }
         ]).then(answers => {
@@ -95,6 +93,7 @@ function employeeMenu() {
         })
     }
 
+    //function definition of CLI Prompts related to the Engineer Employee role
     function addEngineerInfo() {
         inquirer.prompt([
             {
@@ -117,13 +116,14 @@ function employeeMenu() {
                 name: "gitID",
                 message: "Enter engineer's github ID:"
             }
-        ]).then(answers => {
-            employeeArray.push(new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.gitID));
-            idArray.push(answers.engineerId);
+        ]).then(answerEng => {
+            employeeArray.push(new Engineer(answerEng.engineerName, answerEng.engineerId, answerEng.engineerEmail, answerEng.gitID));
+            //console.log("Engineer Info:" +  JSON.stringify(employeeArray,null,""));
             addTeamInfo();
         })
     }
 
+    //function definition of CLI Prompts related to the Intern Employee role
     function addInternInfo() {
         inquirer.prompt([
             {
@@ -146,21 +146,25 @@ function employeeMenu() {
                 name: "school",
                 message: "Enter Intern's school name:"
             }
-        ]).then(answers => {
-            employeeArray.push(new Intern(answers.internName, answers.internId, answers.internEmail, answers.school));
-            idArray.push(answers.internId);
+        ]).then(answerIntern => {
+            employeeArray.push(new Intern(answerIntern.internName, answerIntern.internId, answerIntern.internEmail, answerIntern.school));
+            //console.log("Intern Info:" +  JSON.stringify(employeeArray,null,""));
             addTeamInfo();
         })
     }
 
+    //function definition of rendering the Team Info after gathering all information about the Manager and his Engineering and Intern team
     function renderTeamInfo(){
-        console.log("Employee Summary Page is being Rendered!!!!");
+        console.log("Employee Summary Page is getting Rendered!!!!");
         if (!fs.existsSync(OUTPUT_DIR)){
             fs.mkdirSync(OUTPUT_DIR)
         }
         fs.writeFileSync(outputPath, render(employeeArray), "utf-8");
     }
-  
+    
+    //Invoke the function that will display the Manager Prompts, which has logic to invoke the other role's prompts based on the User choices
+    addManagerInfo();
 };
 
+//Function call that Kick Starts the Application
 employeeMenu();

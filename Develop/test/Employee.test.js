@@ -1,3 +1,5 @@
+//Jest code to test the Employee Class module definition
+
 const Employee = require("../lib/Employee");
 
 test("Can instantiate Employee instance", () => {

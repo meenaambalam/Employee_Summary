@@ -1,4 +1,4 @@
-// TODO: Write code to define and export the Intern class.  HINT: This class should inherit from Employee.
+// Intern Module - sub-class defined from Employee Super-Class
 const Employee = require("./Employee");
 
 class Intern extends Employee {

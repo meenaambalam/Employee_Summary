@@ -1,8 +1,12 @@
+// HTML Rendering Module
+
+//Renders the employee information into HTML format as a visual display the Employee Summary
 const path = require("path");
 const fs = require("fs");
 
 const templatesDir = path.resolve(__dirname, "../templates");
 
+// Renders the employees based on thier role. Uses the templates respective to their role
 const render = employees => {
   const html = [];
 
@@ -22,7 +26,7 @@ const render = employees => {
   return renderMain(html.join(""));
 
 };
-
+// uses the Manager HTML template and populates the placeholder values with information from the values taken from the Employee Array specific to Manager Role
 const renderManager = manager => {
   let template = fs.readFileSync(path.resolve(templatesDir, "manager.html"), "utf8");
   template = replacePlaceholders(template, "name", manager.getName());
@@ -33,6 +37,7 @@ const renderManager = manager => {
   return template;
 };
 
+// uses the Engineer HTML template and populates the placeholder values with information from the values taken from the Employee Array specific to Engineer Role
 const renderEngineer = engineer => {
   let template = fs.readFileSync(path.resolve(templatesDir, "engineer.html"), "utf8");
   template = replacePlaceholders(template, "name", engineer.getName());
@@ -43,6 +48,7 @@ const renderEngineer = engineer => {
   return template;
 };
 
+// uses the Intern HTML template and populates the placeholder values with information from the values taken from the Employee Array specific to Intern Role
 const renderIntern = intern => {
   let template = fs.readFileSync(path.resolve(templatesDir, "intern.html"), "utf8");
   template = replacePlaceholders(template, "name", intern.getName());
@@ -53,6 +59,7 @@ const renderIntern = intern => {
   return template;
 };
 
+// Rendering the main HTML page using the Main template and populating with placeholders with real data
 const renderMain = html => {
   const template = fs.readFileSync(path.resolve(templatesDir, "main.html"), "utf8");
   return replacePlaceholders(template, "team", html);

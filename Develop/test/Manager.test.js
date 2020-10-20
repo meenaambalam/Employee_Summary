@@ -1,3 +1,5 @@
+//Jest code to test the Manager Class module definition
+
 const Manager = require("../lib/Manager");
 const Employee = require("../lib/Employee");
 
