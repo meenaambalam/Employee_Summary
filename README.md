@@ -21,7 +21,9 @@
 
 6. [Tests](#tests)
 
-7. [Questions](#questions)
+7. [Screenshots](#screenshots)
+
+8. [Questions](#questions)
         
 <div id="description"/>
         
@@ -64,7 +66,22 @@ No License
 ```
 JEST npm module is required to run the test suites. JEST can be installed by running 'npm i jest'. The test suites are located in the 'test' folder to test the Employee, Manager, Engineer and Intern class definition.
 ```
-        
+<div id="screenshots"/>
+
+## Screenshots
+Screenshot displaying the user prompts and user input for the Manager and Engineer employee role:
+![Screenshot#1](./Assets/Employee_Summary_Generator_Screenshot_1.PNG)
+
+Screenshot displaying the user prompts and user input for the Intern employee role:
+
+![Screenshot#2](./Assets/Employee_Summary_Generator_Screenshot_2.PNG)
+
+Screenshot displaying the resultant HTML rendered/generated to display the Employee Summary ( i.e. Employees, their role and other relevant details respective to the roles):
+
+![Screenshot#3](./Assets/Employee_Summary_Generator_Screenshot_3.PNG)
+
+
+
 <div id="questions"/>
         
 ## Questions
